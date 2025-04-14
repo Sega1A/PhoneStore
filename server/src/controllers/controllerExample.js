@@ -11,7 +11,8 @@ export async function showExample(req, res) {
 export async function databaseExample(req, res) {
   // We use a Trycatch block becouse the connection with the database may fail.
   try {
-    const query = "SELECT ID, NAME FROM PHONE";
+    const query =
+      "SELECT MODEL, MARC, SPECS, REGISTER_DATE, PHOTO, STATE FROM PHONE";
     const [response] = await dbConnection.query(query);
     res.json(response);
   } catch (error) {
