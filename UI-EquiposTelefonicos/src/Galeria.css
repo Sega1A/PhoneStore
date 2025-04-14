@@ -1,0 +1,86 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Barra de navegación */
+  .navbar {
+    background-color: #333;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 2px -2px gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Lista de navegación */
+  .navbar-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-item {
+    margin: 0 10px;
+  }
+  
+  .navbar-link {
+    display: inline-block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+  }
+  
+  .navbar-link:hover {
+    background-color: #444;
+    color: #ff9800;
+  }
+  
+  /* Área del usuario */
+  .user-role {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .user-role span {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /* Botón de cambio de rol */
+  .role-toggle-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #ff9800;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .role-toggle-btn:hover {
+    background-color: #e68900;
+  }
+  
+  /* Contenido de la página */
+  .page-content {
+    margin-top: 80px;
+    padding: 20px;
+    text-align: center;
+  }
+  
