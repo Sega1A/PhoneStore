@@ -1,0 +1,17 @@
+.details-wrapper {
+  position: relative;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background-color: #fff;
+}
+
+.floating-label {
+  position: absolute;
+  top: -0.7rem;
+  left: 1rem;
+  background-color: white;
+  padding: 0 0.4rem;
+  font-size: 0.85rem;
+  color: #495057;
+  font-weight: 500;
+}
