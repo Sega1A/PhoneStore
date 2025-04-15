@@ -1,4 +1,4 @@
-import { getAllPhones } from "../services/phoneService.js";
+import { getAllPhones, insertPhone } from "../services/phoneService.js";
 
 export async function getPhones(req, res) {
   try {
@@ -10,5 +10,29 @@ export async function getPhones(req, res) {
       message: "Error de la base de datos",
       error: error.message ?? "Error desconocido",
     });
+  }
+}
+
+export async function addPhone (req,res) {
+  try {
+    const {
+      model,
+      marc,
+      specs,
+      photo,
+      state,
+      price
+    } = req.body;
+    const registerDate = new Date();
+    
+    const response = await insertPhone(model, marc, specs, registerDate, photo, state, price);
+    res.json(response)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Error de la base de datos",
+      error: error.message ?? "Error desconocido"
+    })
+    
   }
 }
