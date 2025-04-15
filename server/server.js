@@ -4,6 +4,8 @@ import { apiRouter } from "./src/routes/api.js";
 
 const app = express();
 app.use(express.json());
+app.use("/phones", express.static("src/public/phones"));
+
 app.use("/api", apiRouter);
 
 app.listen(PORT, () => {
