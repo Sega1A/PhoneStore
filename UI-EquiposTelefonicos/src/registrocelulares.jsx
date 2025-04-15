@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./RegistroCelulares.css";
 import celularImg from "./assets/Celular.png";
+import { sendPhone } from "./services/phoneService";
 
 const App = () => {
   const [user, setUser] = useState({ role: "Administrador" });
-
+  const [photo, setPhoto] = useState(null);
   const [celulares, setCelulares] = useState([]);
   const [nuevoCelular, setNuevoCelular] = useState({
     marca: "",
@@ -42,20 +43,34 @@ const App = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validarCampos()) {
       setMostrarModal(true);
       return;
     }
-    setCelulares([...celulares, nuevoCelular]);
-    setNuevoCelular({
-      marca: "",
-      modelo: "",
-      especificacion: "",
-      precio: "",
-      cantidad: 1,
-    });
+    try {
+      await sendPhone(
+        nuevoCelular.modelo,
+        nuevoCelular.marca,
+        nuevoCelular.especificacion,
+        nuevoCelular.precio,
+        photo
+      );
+      setCelulares([...celulares, nuevoCelular]);
+      setNuevoCelular({
+        marca: "",
+        modelo: "",
+        especificacion: "",
+        precio: "",
+        cantidad: 1,
+      });
+      setPhoto(null);
+    } catch (err) {
+      console.error("Error al registrar:", err);
+      setMensajeError("Error al registrar el teléfono");
+      setMostrarModal(true);
+    }
   };
 
   const eliminarCelular = (index) => {
@@ -137,6 +152,15 @@ const App = () => {
                       +
                     </button>
                   </div>
+                </div>
+                <div>
+                  <label>Imagen:</label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    accept="image/*"
+                    onChange={(e) => setPhoto(e.target.files[0])}
+                  />
                 </div>
 
                 <button type="submit">Registrar</button>

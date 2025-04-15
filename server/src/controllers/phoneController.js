@@ -15,8 +15,9 @@ export async function getPhones(req, res) {
 
 export async function addPhone(req, res) {
   try {
-    const { model, marc, specs, state, price } = req.body;
+    const { model, marc, specs, price } = req.body;
     const registerDate = new Date();
+    const state = 1;
 
     const photo = req.file
       ? `${req.protocol}://${req.get("host")}/phones/${req.file.filename}`
