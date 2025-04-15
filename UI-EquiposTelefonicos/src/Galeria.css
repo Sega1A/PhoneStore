@@ -1,0 +1,71 @@
+.content {
+  padding: 20px;
+}
+
+.tabla-galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.cartilla {
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.tarjeta-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  gap: 15px;
+}
+
+.tarjeta-imagen {
+  width: 150px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.tarjeta-contenido {
+  flex: 1;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+table th {
+  text-align: left;
+  padding-right: 8px;
+  width: 100px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.btn-guardar {
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.btn-guardar:hover {
+  background-color: #218838;
+}
