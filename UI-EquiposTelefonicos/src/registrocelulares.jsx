@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./RegistroCelulares.css";
-import celularImg from "./assets/celular.png";
+import celularImg from "./assets/Celular.png";
 
 const App = () => {
   const [user, setUser] = useState({ role: "Administrador" });

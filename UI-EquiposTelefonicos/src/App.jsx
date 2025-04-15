@@ -1,6 +1,6 @@
 import { Routes, Route, Link } from "react-router-dom";
 
-import RegistroCelulares from "./RegistroCelulares";
+import RegistroCelulares from "./registrocelulares";
 import Galeria from "./Galeria";
 import Reportes from "./Pages/Reportes";
 import React, { useState } from "react";
