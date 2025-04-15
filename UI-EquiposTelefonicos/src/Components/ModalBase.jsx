@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import reactLogo from "../assets/react.svg";
-import "../Pages/FormDetalleProducto.css";
+import "./ModalBase.css";
 
 const ModalBase = ({ show, onClose, title, data, children, footer }) => {
   const [cliente, setCliente] = useState("");
@@ -43,21 +43,11 @@ const ModalBase = ({ show, onClose, title, data, children, footer }) => {
         setTimeout(() => {
           setMensaje(null);
         }, 1500);
-        // console.log(payload);
       } else {
         setMensaje(result.error || "Error al procesar el pago.");
         setError(true);
-        // console.log(payload);
       }
     } catch (err) {
-      // setMensaje("Pago procesado correctamente.");
-      // setError(false);
-      // setCliente("");
-      // setFormaPago("");
-      // setTimeout(() => {
-      //   setMensaje(null);
-      // }, 1500);
-
       setMensaje("Error de conexión con el servidor.");
       setError(true);
       setCliente("");
@@ -151,7 +141,7 @@ const ModalBase = ({ show, onClose, title, data, children, footer }) => {
                 </Form.Label>
                 <Form.Select
                   aria-label="Seleccione forma de pago"
-                  value={formaPago}
+                  value={formaPago || "Efectivo"}
                   onChange={(e) => setFormaPago(e.target.value)}
                 >
                   <option value="">Seleccione forma de pago</option>
