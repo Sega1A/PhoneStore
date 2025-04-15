@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import ModalBase from "./Components/ModalBase";
-// import FormDetalleProducto from "./Pages/FormDetalleProducto";
 import { Button } from "react-bootstrap";
+import Reportes from "./Pages/Reportes";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -19,7 +18,6 @@ function App() {
   return (
     <>
       <Button onClick={() => setShowModal(true)}>Abrir modal genérico</Button>
-
       <ModalBase
         show={showModal}
         onClose={() => setShowModal(false)}
@@ -29,6 +27,13 @@ function App() {
       >
         {/* <FormDetalleProducto data={dataPhone} /> */}
       </ModalBase>
+
+      <nav>
+        <Link to="/reporte">Registro</Link>
+      </nav>
+      <Routes>
+        <Route path="/reporte" element={<Reportes />} />
+      </Routes>
     </>
   );
 }

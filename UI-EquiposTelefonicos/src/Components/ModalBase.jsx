@@ -35,23 +35,36 @@ const ModalBase = ({ show, onClose, title, data, children, footer }) => {
 
       const result = await response.json();
 
-      // if (response.ok) {
-      if (true) {
+      if (response.ok) {
         setMensaje(result.message || "Pago procesado correctamente.");
         setError(false);
-        console.log(payload);
+        setCliente("");
+        setFormaPago("");
+        setTimeout(() => {
+          setMensaje(null);
+        }, 1500);
+        // console.log(payload);
       } else {
         setMensaje(result.error || "Error al procesar el pago.");
         setError(true);
-        console.log(payload);
+        // console.log(payload);
       }
     } catch (err) {
       setMensaje("Pago procesado correctamente.");
       setError(false);
-      console.log(payload);
+      setCliente("");
+      setFormaPago("");
+      setTimeout(() => {
+        setMensaje(null);
+      }, 1500);
 
       // setMensaje("Error de conexión con el servidor.");
       // setError(true);
+      // setCliente("");
+      // setFormaPago("");
+      // setTimeout(() => {
+      //   setMensaje(null);
+      // }, 1500);
       // console.log(payload);
     }
   };
