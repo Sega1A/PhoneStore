@@ -1,27 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import './Galeria.css';
+import React, { useState, useEffect } from "react";
+import "./Galeria.css";
+import { Button } from "react-bootstrap";
+import ModalBase from "./Components/ModalBase";
+import reactLogo from "./assets/react.svg";
 
-const Tarjeta = ({ id }) => {
-  const storageKey = `tarjeta-${id}`;
-  const [nombre, setNombre] = useState('');
-  const [caracteristica, setCaracteristica] = useState('');
-  const [modelo, setModelo] = useState('');
+const Tarjeta = ({ id, nombre, caracteristica, modelo }) => {
+  const [showModal, setShowModal] = useState(false);
 
-  // Cargar datos si existen en localStorage
-  useEffect(() => {
-    const datosGuardados = localStorage.getItem(storageKey);
-    if (datosGuardados) {
-      const datos = JSON.parse(datosGuardados);
-      setNombre(datos.nombre);
-      setCaracteristica(datos.caracteristica);
-      setModelo(datos.modelo);
-    }
-  }, [storageKey]);
-
-  const handleGuardar = () => {
-    const datos = { nombre, caracteristica, modelo };
-    localStorage.setItem(storageKey, JSON.stringify(datos));
-    alert(`Datos guardados para la tarjeta ${id + 1}`);
+  const dataPhone = {
+    model: modelo,
+    marc: nombre,
+    specs: caracteristica,
+    price: 13.3,
   };
 
   return (
@@ -29,7 +19,7 @@ const Tarjeta = ({ id }) => {
       <div className="tarjeta-horizontal">
         <img
           className="tarjeta-imagen"
-          src={'https://via.placeholder.com/150'}
+          src={reactLogo}
           alt="Imagen del producto"
         />
         <div className="tarjeta-contenido">
@@ -37,51 +27,60 @@ const Tarjeta = ({ id }) => {
             <tbody>
               <tr>
                 <th>Nombre</th>
-                <td>
-                  <input
-                    type="text"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                  />
-                </td>
+                <td>{nombre}</td>
               </tr>
               <tr>
                 <th>Característica</th>
-                <td>
-                  <input
-                    type="text"
-                    value={caracteristica}
-                    onChange={(e) => setCaracteristica(e.target.value)}
-                  />
-                </td>
+                <td>{caracteristica}</td>
               </tr>
               <tr>
                 <th>Modelo</th>
-                <td>
-                  <input
-                    type="text"
-                    value={modelo}
-                    onChange={(e) => setModelo(e.target.value)}
-                  />
-                </td>
+                <td>{modelo}</td>
               </tr>
             </tbody>
           </table>
-          <button className="btn-guardar" onClick={handleGuardar}>
-            Guardar
-          </button>
+          <Button onClick={() => setShowModal(true)}>Comprar</Button>
         </div>
       </div>
+
+      <ModalBase
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        title="Comprar Equipo Telefonico"
+        data={dataPhone}
+      />
     </div>
   );
 };
 
 const Galeria = () => {
+  const [datos, setDatos] = useState([]);
+
+  useEffect(() => {
+    // datos fake
+    const fetchDatos = () => {
+      const data = Array.from({ length: 12 }).map((_, i) => ({
+        nombre: `Producto ${i + 1}`,
+        caracteristica: `Característica impresionante ${i + 1}`,
+        modelo: `Modelo-${1000 + i}`,
+      }));
+      setDatos(data);
+    };
+
+    fetchDatos();
+  }, []);
+
   return (
     <div className="content">
       <div className="tabla-galeria">
-        {Array.from({ length: 12 }).map((_, index) => (
-          <Tarjeta key={index} id={index} />
+        {datos.map((item, index) => (
+          <Tarjeta
+            key={index}
+            id={index}
+            nombre={item.nombre}
+            caracteristica={item.caracteristica}
+            modelo={item.modelo}
+          />
         ))}
       </div>
     </div>

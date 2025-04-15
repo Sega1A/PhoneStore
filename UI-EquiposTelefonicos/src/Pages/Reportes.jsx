@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, Container, Spinner, Alert } from "react-bootstrap";
 import "./Reportes.css";
+import "../RegistroCelulares.css";
 
 const Reportes = () => {
   const [reportes, setReportes] = useState([]);
@@ -71,51 +72,53 @@ const Reportes = () => {
   // }, []);
 
   return (
-    <Container className="mt-4">
-      <div className="details-wrapper mb-3 p-3">
-        <span className="floating-label">Reportes</span>
-        <p>Resumen de los reportes por fecha o tipo de equipo.</p>
-      </div>
-
-      {cargando ? (
-        <div className="text-center">
-          <Spinner animation="border" />
+    <div className="card-container mt-4">
+      <div className="card">
+        <div className="details-wrapper mb-3 p-3">
+          <span className="floating-label">Reportes</span>
+          <p>Resumen de los reportes por fecha o tipo de equipo.</p>
         </div>
-      ) : error ? (
-        <Alert variant="danger">{error}</Alert>
-      ) : (
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Marca</th>
-              <th>Modelo</th>
-              <th>Cliente</th>
-              <th>Fecha</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reportes.length > 0 ? (
-              reportes.map((item, idx) => (
-                <tr key={item.id || idx}>
-                  <td>{idx + 1}</td>
-                  <td>{item.marca}</td>
-                  <td>{item.modelo}</td>
-                  <td>{item.cliente}</td>
-                  <td>{item.fecha}</td>
-                </tr>
-              ))
-            ) : (
+
+        {cargando ? (
+          <div className="text-center">
+            <Spinner animation="border" />
+          </div>
+        ) : error ? (
+          <Alert variant="danger">{error}</Alert>
+        ) : (
+          <Table striped bordered hover responsive>
+            <thead>
               <tr>
-                <td colSpan="5" className="text-center">
-                  No hay reportes disponibles.
-                </td>
+                <th>#</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
               </tr>
-            )}
-          </tbody>
-        </Table>
-      )}
-    </Container>
+            </thead>
+            <tbody>
+              {reportes.length > 0 ? (
+                reportes.map((item, idx) => (
+                  <tr key={item.id || idx}>
+                    <td>{idx + 1}</td>
+                    <td>{item.marca}</td>
+                    <td>{item.modelo}</td>
+                    <td>{item.cliente}</td>
+                    <td>{item.fecha}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center">
+                    No hay reportes disponibles.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        )}
+      </div>
+    </div>
   );
 };
 

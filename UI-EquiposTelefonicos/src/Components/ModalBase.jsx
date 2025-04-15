@@ -50,22 +50,22 @@ const ModalBase = ({ show, onClose, title, data, children, footer }) => {
         // console.log(payload);
       }
     } catch (err) {
-      setMensaje("Pago procesado correctamente.");
-      setError(false);
-      setCliente("");
-      setFormaPago("");
-      setTimeout(() => {
-        setMensaje(null);
-      }, 1500);
-
-      // setMensaje("Error de conexión con el servidor.");
-      // setError(true);
+      // setMensaje("Pago procesado correctamente.");
+      // setError(false);
       // setCliente("");
       // setFormaPago("");
       // setTimeout(() => {
       //   setMensaje(null);
       // }, 1500);
-      // console.log(payload);
+
+      setMensaje("Error de conexión con el servidor.");
+      setError(true);
+      setCliente("");
+      setFormaPago("");
+      setTimeout(() => {
+        setMensaje(null);
+      }, 1500);
+      console.log(payload);
     }
   };
 
