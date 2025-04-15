@@ -1,35 +1,79 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, Link } from "react-router-dom";
+
+import RegistroCelulares from "./registrocelulares";
+import Galeria from "./Galeria";
+import Reportes from "./Pages/Reportes";
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState({ role: "Usuario" });
+
+  // Cambiar entre rol de Usuario y Administrador
+  const toggleRole = () => {
+    setUser((prevUser) => ({
+      role: prevUser.role === "Usuario" ? "Administrador" : "Usuario",
+    }));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <nav className="navbar">
+        <ul className="navbar-list">
+          <li className="navbar-item">
+            <Link to="/" className="navbar-link">
+              Galeria
+            </Link>
+          </li>
+          {/* <li className="navbar-item">
+            <Link to="/about" className="navbar-link">
+              Acerca de
+            </Link>
+          </li> */}
+          {/* <li className="navbar-item">
+            <Link to="/services" className="navbar-link">
+              Servicios
+            </Link>
+          </li> */}
+          {/* <li className="navbar-item">
+            <Link to="/contact" className="navbar-link">
+              Contacto
+            </Link>
+          </li> */}
+
+          {user.role === "Administrador" && (
+            <li className="navbar-item">
+              <Link to="/registro" className="navbar-link">
+                Registro
+              </Link>
+            </li>
+          )}
+          {user.role === "Administrador" && (
+            <li className="navbar-item">
+              <Link to="/reporte" className="navbar-link">
+                Reporte
+              </Link>
+            </li>
+          )}
+          <li>
+            <div className="user-role">
+              <span>{user.role}</span>
+              <button className="role-toggle-btn" onClick={toggleRole}>
+                Cambiar a{" "}
+                {user.role === "Usuario" ? "Administrador" : "Usuario"}
+              </button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Galeria />} />
+        <Route path="/registro" element={<RegistroCelulares />} />
+        <Route path="/reporte" element={<Reportes />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
