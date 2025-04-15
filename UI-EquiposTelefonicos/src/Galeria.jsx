@@ -1,51 +1,90 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import './Galeria.css';
 
-const Galeria = () => {
-  const [user, setUser] = useState({ role: 'Usuario' });
+const Tarjeta = ({ id }) => {
+  const storageKey = `tarjeta-${id}`;
+  const [nombre, setNombre] = useState('');
+  const [caracteristica, setCaracteristica] = useState('');
+  const [modelo, setModelo] = useState('');
 
-  const toggleRole = () => {
-    setUser(prevUser => ({
-      role: prevUser.role === 'Usuario' ? 'Administrador' : 'Usuario'
-    }));
+  // Cargar datos si existen en localStorage
+  useEffect(() => {
+    const datosGuardados = localStorage.getItem(storageKey);
+    if (datosGuardados) {
+      const datos = JSON.parse(datosGuardados);
+      setNombre(datos.nombre);
+      setCaracteristica(datos.caracteristica);
+      setModelo(datos.modelo);
+    }
+  }, [storageKey]);
+
+  const handleGuardar = () => {
+    const datos = { nombre, caracteristica, modelo };
+    localStorage.setItem(storageKey, JSON.stringify(datos));
+    alert(`Datos guardados para la tarjeta ${id + 1}`);
   };
 
   return (
-    <nav className="navbar">
-      <ul className="navbar-list">
-        <li className="navbar-item">
-          <Link to="/" className="navbar-link">Inicio</Link>
-        </li>
-        <li className="navbar-item">
-          <Link to="/about" className="navbar-link">Acerca de</Link>
-        </li>
-        <li className="navbar-item">
-          <Link to="/services" className="navbar-link">Servicios</Link>
-        </li>
-        <li className="navbar-item">
-          <Link to="/contact" className="navbar-link">Contacto</Link>
-        </li>
-
-        {user.role === 'Administrador' && (
-          <>
-            <li className="navbar-item">
-              <Link to="/admin-dashboard" className="navbar-link">Panel Admin</Link>
-            </li>
-            <li className="navbar-item">
-              <Link to="/manage-users" className="navbar-link">Gestionar Usuarios</Link>
-            </li>
-          </>
-        )}
-      </ul>
-
-      <div className="user-role">
-        <span>{user.role}</span>
-        <button className="role-toggle-btn" onClick={toggleRole}>
-          Cambiar a {user.role === 'Usuario' ? 'Administrador' : 'Usuario'}
-        </button>
+    <div className="cartilla">
+      <div className="tarjeta-horizontal">
+        <img
+          className="tarjeta-imagen"
+          src={'https://via.placeholder.com/150'}
+          alt="Imagen del producto"
+        />
+        <div className="tarjeta-contenido">
+          <table>
+            <tbody>
+              <tr>
+                <th>Nombre</th>
+                <td>
+                  <input
+                    type="text"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Característica</th>
+                <td>
+                  <input
+                    type="text"
+                    value={caracteristica}
+                    onChange={(e) => setCaracteristica(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Modelo</th>
+                <td>
+                  <input
+                    type="text"
+                    value={modelo}
+                    onChange={(e) => setModelo(e.target.value)}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button className="btn-guardar" onClick={handleGuardar}>
+            Guardar
+          </button>
+        </div>
       </div>
-    </nav>
+    </div>
+  );
+};
+
+const Galeria = () => {
+  return (
+    <div className="content">
+      <div className="tabla-galeria">
+        {Array.from({ length: 12 }).map((_, index) => (
+          <Tarjeta key={index} id={index} />
+        ))}
+      </div>
+    </div>
   );
 };
 

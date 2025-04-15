@@ -1,86 +1,71 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Barra de navegación */
-  .navbar {
-    background-color: #333;
-    padding: 10px 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 4px 2px -2px gray;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* Lista de navegación */
-  .navbar-list {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar-item {
-    margin: 0 10px;
-  }
-  
-  .navbar-link {
-    display: inline-block;
-    padding: 10px 15px;
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    border-radius: 5px;
-  }
-  
-  .navbar-link:hover {
-    background-color: #444;
-    color: #ff9800;
-  }
-  
-  /* Área del usuario */
-  .user-role {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .user-role span {
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  /* Botón de cambio de rol */
-  .role-toggle-btn {
-    padding: 10px 15px;
-    font-size: 16px;
-    background-color: #ff9800;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .role-toggle-btn:hover {
-    background-color: #e68900;
-  }
-  
-  /* Contenido de la página */
-  .page-content {
-    margin-top: 80px;
-    padding: 20px;
-    text-align: center;
-  }
-  
+.content {
+  padding: 20px;
+}
+
+.tabla-galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.cartilla {
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.tarjeta-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  gap: 15px;
+}
+
+.tarjeta-imagen {
+  width: 150px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.tarjeta-contenido {
+  flex: 1;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+table th {
+  text-align: left;
+  padding-right: 8px;
+  width: 100px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.btn-guardar {
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.btn-guardar:hover {
+  background-color: #218838;
+}
