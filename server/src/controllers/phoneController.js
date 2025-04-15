@@ -13,26 +13,31 @@ export async function getPhones(req, res) {
   }
 }
 
-export async function addPhone (req,res) {
+export async function addPhone(req, res) {
   try {
-    const {
+    const { model, marc, specs, state, price } = req.body;
+    const registerDate = new Date();
+
+    const photo = req.file
+      ? `${req.protocol}://${req.get("host")}/phones/${req.file.filename}`
+      : null;
+
+    const response = await insertPhone(
       model,
       marc,
       specs,
+      registerDate,
       photo,
       state,
       price
-    } = req.body;
-    const registerDate = new Date();
-    
-    const response = await insertPhone(model, marc, specs, registerDate, photo, state, price);
-    res.json(response)
+    );
+
+    res.json(response);
   } catch (error) {
     console.error(error);
     res.status(500).json({
       message: "Error de la base de datos",
-      error: error.message ?? "Error desconocido"
-    })
-    
+      error: error.message ?? "Error desconocido",
+    });
   }
 }

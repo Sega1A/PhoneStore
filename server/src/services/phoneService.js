@@ -7,9 +7,25 @@ export async function getAllPhones() {
   return phones;
 }
 
-export async function insertPhone(model, marc, specs, registerDate, photo, state, price) {
+export async function insertPhone(
+  model,
+  marc,
+  specs,
+  registerDate,
+  photo,
+  state,
+  price
+) {
   const query =
-  "INSERT INTO PHONE (MODEL, MARC, SPECS, REGISTER_DATE, PHOTO, STATE, PRICE) VALUES (?,?,?,?,?,?,?);";
-  const [response] = await dbConnection.query(query, [model, marc, specs, registerDate, photo, state, price]);
+    "INSERT INTO PHONE (MODEL, MARC, SPECS, REGISTER_DATE, PHOTO, STATE, PRICE) VALUES (?,?,?,?,?,?,?);";
+  const [response] = await dbConnection.query(query, [
+    model,
+    marc,
+    specs,
+    registerDate,
+    photo,
+    state,
+    price,
+  ]);
   return response;
 }
