@@ -110,7 +110,7 @@ const ModalBase = ({ show, onClose, title, data, children, footer }) => {
                 <Col xs={4} md={3}>
                   <img
                     src={
-                      data.imageUrl ||
+                      data.photo ||
                       reactLogo ||
                       "https://via.placeholder.com/100"
                     }

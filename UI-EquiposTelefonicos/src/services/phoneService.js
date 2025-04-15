@@ -1,6 +1,6 @@
-export async function sendPhone(model, marc, specs, price, photo) {
-  const APIURL = "http://localhost:3000/api";
+const APIURL = "http://localhost:3000/api";
 
+export async function sendPhone(model, marc, specs, price, photo) {
   const formData = new FormData();
   formData.append("model", model);
   formData.append("marc", marc);
@@ -15,11 +15,19 @@ export async function sendPhone(model, marc, specs, price, photo) {
     });
 
     const result = await response.json();
-    console.log(result);
-
     return result;
   } catch (error) {
     console.error("Error al enviar el teléfono:", error);
     throw error;
+  }
+}
+
+export async function getPhones() {
+  try {
+    const response = await fetch(`${APIURL}/phone/getPhones`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
   }
 }

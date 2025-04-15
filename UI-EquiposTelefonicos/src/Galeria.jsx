@@ -3,15 +3,17 @@ import "./Galeria.css";
 import { Button } from "react-bootstrap";
 import ModalBase from "./Components/ModalBase";
 import reactLogo from "./assets/react.svg";
+import { getPhones } from "./services/phoneService";
 
-const Tarjeta = ({ id, nombre, caracteristica, modelo }) => {
+const Tarjeta = ({ nombre, caracteristica, modelo, price, photo }) => {
   const [showModal, setShowModal] = useState(false);
 
   const dataPhone = {
     model: modelo,
     marc: nombre,
     specs: caracteristica,
-    price: 13.3,
+    price: price,
+    photo: photo,
   };
 
   return (
@@ -19,7 +21,7 @@ const Tarjeta = ({ id, nombre, caracteristica, modelo }) => {
       <div className="tarjeta-horizontal">
         <img
           className="tarjeta-imagen"
-          src={reactLogo}
+          src={photo ?? reactLogo}
           alt="Imagen del producto"
         />
         <div className="tarjeta-contenido">
@@ -57,18 +59,20 @@ const Galeria = () => {
   const [datos, setDatos] = useState([]);
 
   useEffect(() => {
-    // datos fake
-    const fetchDatos = () => {
-      const data = Array.from({ length: 12 }).map((_, i) => ({
-        nombre: `Producto ${i + 1}`,
-        caracteristica: `Característica impresionante ${i + 1}`,
-        modelo: `Modelo-${1000 + i}`,
-      }));
-      setDatos(data);
-    };
-
-    fetchDatos();
+    fetchPhones();
   }, []);
+
+  const fetchPhones = async () => {
+    try {
+      const phoneList = await getPhones();
+      console.log(phoneList);
+
+      setDatos(phoneList);
+    } catch (error) {
+      console.error(error);
+      setDatos([]);
+    }
+  };
 
   return (
     <div className="content">
@@ -77,9 +81,11 @@ const Galeria = () => {
           <Tarjeta
             key={index}
             id={index}
-            nombre={item.nombre}
-            caracteristica={item.caracteristica}
-            modelo={item.modelo}
+            nombre={item.MODEL}
+            caracteristica={item.SPECS}
+            modelo={item.MODEL}
+            price={item.PRICE}
+            photo={item.PHOTO}
           />
         ))}
       </div>
